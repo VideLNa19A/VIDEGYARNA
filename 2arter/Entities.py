@@ -79,16 +79,12 @@ class Entity:
 
 	def change_angle(self):
 		# Change angle depending on steer speed, desired angle and distance to rotate
-		if self.desired_angle > self.angle:
-			if abs(self.angle - self.desired_angle) > math.pi:
-				self.angle -= self.steer
-			else:
-				self.angle += self.steer
-		elif self.desired_angle < self.angle:
-			if abs(self.angle - self.desired_angle) > math.pi:
-				self.angle += self.steer
-			else:
-				self.angle -= self.steer
+		direction = 1
+		if self.desired_angle < self.angle:
+			direction = -1
+		if abs(self.angle - self.desired_angle) > math.pi:
+				direction *= -1
+		self.angle += direction * self.steer
 
 	
 	def change_colour(self):
